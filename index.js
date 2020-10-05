@@ -115,15 +115,13 @@ app.get('/auth', function(req, res){
   var data = {form: {
     client_id: process.env.SLACK_CLIENT_ID,
     client_secret: process.env.SLACK_CLIENT_SECRET,
-    code: req.query.code
+    code: req.query.code,
+    redirect_uri: 'https://pop-slack.herokuapp.com/auth'
   }};
   request.post(apiUrl + '/oauth.access', data, function (error, response, body) {
     if (!error && response.statusCode == 200) {
 
-      // Get an auth token (and store the team_id / token)
-      console.log(body);
-
-      res.sendStatus(200);
+      res.status(200).json(JSON.parse(body));
 
       // Show a nicer web page or redirect to Slack, instead of just giving 200 in reality!
       //res.redirect(__dirname + "/public/success.html");
