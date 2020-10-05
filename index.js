@@ -121,7 +121,7 @@ app.get('/auth', function(req, res){
     if (!error && response.statusCode == 200) {
 
       // Get an auth token (and store the team_id / token)
-      console.log(JSON.parse(body).access_token);
+      console.log(body);
 
       res.sendStatus(200);
 
